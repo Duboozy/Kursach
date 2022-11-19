@@ -84,6 +84,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<<<< Temporary merge branch 1
+    <Compile Include="Class1.cs" />
+=========
+>>>>>>>>> Temporary merge branch 2
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
