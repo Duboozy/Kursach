@@ -18,6 +18,7 @@ namespace Kursach
     {
 
         DataBase dataBase = new DataBase();
+
         public Aunthefication()
         {
             InitializeComponent();
