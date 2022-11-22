@@ -16,8 +16,19 @@ namespace Kursach
    
     public partial class Aunthefication : Form
     {
-
-        DataBase dataBase = new DataBase();
+        static string sha256(string randomString)
+        {
+            //Тут происходит криптографическая магия. Смысл данного метода заключается в том, что строка залетает в метод
+            var crypt = new System.Security.Cryptography.SHA256Managed();
+            var hash = new System.Text.StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(randomString));
+            foreach (byte theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+            return hash.ToString();
+        }
+            DataBase dataBase = new DataBase();
 
         public Aunthefication()
         {
@@ -33,12 +44,13 @@ namespace Kursach
         private void button1_Click(object sender, EventArgs e)
         {
             var LoginUser = Login.Text;
-            var PasswordUser = Password.Text;
+            var PasswordUser = Aunthefication.sha256(Password.Text);
+            
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
             DataTable table = new DataTable();
 
-            MySqlCommand command = new MySqlCommand($"SELECT * FROM `Patient` WHERE number_policy_patient = '{LoginUser}' and password_patient = '{PasswordUser}'", dataBase.getConnection ());
+            MySqlCommand command = new MySqlCommand($"SELECT * FROM `Patient` WHERE fio_patient = '{LoginUser}' and number_policy_patient = '{PasswordUser}'", dataBase.getConnection ());
 
             adapter.SelectCommand = command;
             adapter.Fill(table);
