@@ -34,6 +34,8 @@ namespace Kursach
         {
             InitializeComponent();
             StartPosition= FormStartPosition.CenterScreen;
+            this.WindowState = FormWindowState.Maximized;
+
         }
 
         private void Aunthefication_Load(object sender, EventArgs e)
